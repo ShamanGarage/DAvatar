@@ -25,7 +25,7 @@ Boolean is_pressed = false;
 void setup() {
   size(1200, 780);
   
-  avatar = new Avatar("shaman_pabgre_new", img_size, img_margin);
+  avatar = new Avatar("default", img_size, img_margin);
   avatar.avatar_setup();
   
   // Create an Audio input and grab the 1st channel
