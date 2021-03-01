@@ -52,7 +52,12 @@ class Avatar {
       image(mouths[frame % (numMouths - 1) + 1], 0, 0); 
     }
     else {
-      image(mouths[0], 0, 0); 
+      if (frame_change){
+              image(mouths[0], 0, 0); 
+      }else {
+              image(mouths[frame % (numMouths - 1) + 1], 0, 0); 
+      }
+
     }
     translate(-img_margin, -img_margin);
     update_frame(fps);
