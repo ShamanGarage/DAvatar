@@ -1,7 +1,7 @@
 class Avatar {
   String avatar;
   
-  int numFaces = 4;
+  int numFaces = 6;
   int numMouths = 4;
   PImage[] faces = new PImage[numFaces];
   PImage[] mouths = new PImage[numMouths];
@@ -16,6 +16,8 @@ class Avatar {
   int last_time = 0;
   //int min_speaking = 15;
   
+  boolean frame_change = false;
+  
   Avatar(String avatar, int img_size, int img_margin) {
     this.avatar = avatar; 
     this.img_size = img_size;
@@ -26,13 +28,13 @@ class Avatar {
   
     for (int i =0; i < faces.length; i++) {
       String name = "face" + (i+1) + ".png";
-      faces[i] = loadImage(avatar + "\\faces\\" + name);  
+      faces[i] = loadImage(avatar + "/faces/" + name);  
       faces[i].resize(img_size, img_size);
     }
   
     for (int i =0; i < mouths.length; i++) {
       String name = "mouth" + (i+1) + ".png";
-      mouths[i] = loadImage(avatar + "\\mouths\\" + name);  
+      mouths[i] = loadImage(avatar + "/mouths/" + name);  
       mouths[i].resize(img_size, img_size);
     }
   }
@@ -46,6 +48,7 @@ class Avatar {
     //if (speaking > min_speaking) {
     //Note that volume_for_speaking is a gloabal variable
     if (speaking > volume_for_speaking) {
+      frame_change = false;
       image(mouths[frame % (numMouths - 1) + 1], 0, 0); 
     }
     else {
@@ -62,6 +65,7 @@ class Avatar {
       if ((millis() - last_time) > 1000/fps) {
          last_time = millis();
          frame = (frame + 1) % ((numMouths -1) * (numFaces));
+         frame_change = true;
       }
     }
   }
